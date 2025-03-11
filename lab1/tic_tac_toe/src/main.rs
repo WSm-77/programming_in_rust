@@ -147,7 +147,7 @@ fn game() {
         print_board(board);
 
         if let Some(winner) = get_optional_winner(board) {
-            println!("Player {}. ({}) wins!!!", current_player, winner);
+            println!("Player {}. ({}) wins!!!", current_player + 1, winner);
             return;
         }
 
