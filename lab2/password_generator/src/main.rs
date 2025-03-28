@@ -6,7 +6,6 @@ const UPPERCASE_OPTION: usize = 1;
 const DIGITS_OPTION: usize = 2;
 const SPECIAL_OPTION: usize= 3;
 
-
 fn generate_password(length: usize, charset: &[String]) -> String {
     let mut rng = rng();
 
@@ -38,8 +37,6 @@ fn generate_password(length: usize, charset: &[String]) -> String {
         }
     }
 
-    println!("{allowed_characters:?}");
-
     let password: String = (0..length).into_iter()
         .map(|_| allowed_characters.choose(&mut rng).unwrap())
         .collect();
@@ -54,4 +51,18 @@ fn main() {
     let password = generate_password(pwd_len, &options);
 
     println!("{password}");
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_passwords_len() {
+        for i in 1..=5 {
+            let password_len = i * 5;
+            let password = generate_password(password_len, &["lowercase".to_string()]);
+            assert_eq!(password_len, password.len());
+        }
+    }
 }
